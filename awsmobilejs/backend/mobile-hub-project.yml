@@ -1,0 +1,69 @@
+--- !com.amazonaws.mobilehub.v0.Project 
+features:
+  cloudlogic: !com.amazonaws.mobilehub.v0.CloudLogic 
+    components:
+      KBSLLedgerEntryCRUD: !com.amazonaws.mobilehub.v0.API 
+        attributes:
+          name: KBSLLedgerEntryCRUD
+          requires-signin: false
+          sdk-generation-stage-name: Development
+        paths:
+          /KBSLLedgerEntry: !com.amazonaws.mobilehub.v0.Function 
+            codeFilename: uploads/KBSLLedgerEntry-20180725122132.zip
+            description: 'Handler for calls to resource path : /KBSLLedgerEntry/{proxy+}'
+            enableCORS: true
+            environment: {}
+            handler: lambda.handler
+            hashcode: 4yAisUVfyonfP3Oyf9ljlLp5tAQG5TC8Y5x6yX+SLpw=
+            memorySize: '128'
+            modified: '2018-07-25T17:22:32.435+0000'
+            name: KBSLLedgerEntry
+            runtime: nodejs6.10
+            timeout: '3'
+            version: sk8ULpXlMqs07UeUmgRZ0yGiYfI3QGxR
+          '/KBSLLedgerEntry/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
+            codeFilename: uploads/KBSLLedgerEntry-20180725122132.zip
+            description: 'Handler for calls to resource path : /KBSLLedgerEntry/{proxy+}'
+            enableCORS: true
+            environment: {}
+            handler: lambda.handler
+            hashcode: 4yAisUVfyonfP3Oyf9ljlLp5tAQG5TC8Y5x6yX+SLpw=
+            memorySize: '128'
+            modified: '2018-07-25T17:22:32.435+0000'
+            name: KBSLLedgerEntry
+            runtime: nodejs6.10
+            timeout: '3'
+            version: CqgMiCOZ68dntg72wSyhC7K.8wC857XS
+  content-delivery: !com.amazonaws.mobilehub.v0.ContentDelivery 
+    attributes:
+      enabled: true
+      visibility: public-global
+    components:
+      release: !com.amazonaws.mobilehub.v0.Bucket {}
+  database: !com.amazonaws.mobilehub.v0.Database 
+    components:
+      database-nosql: !com.amazonaws.mobilehub.v0.NoSQLDatabase 
+        tables:
+          - !com.amazonaws.mobilehub.v0.NoSQLTable 
+            attributes:
+              Account: S
+              CreatedBy: S
+              CreationDate: S
+              Credit: N
+              Date: S
+              Debit: N
+              Description: S
+              ID: S
+              SubledgerAccount: S
+            hashKeyName: ID
+            hashKeyType: S
+            rangeKeyName: ''
+            rangeKeyType: ''
+            tableName: ___DYNAMIC_PREFIX___-KBSLLedgerEntry
+            tablePrivacy: public
+  mobile-analytics: !com.amazonaws.mobilehub.v0.Pinpoint 
+    components:
+      analytics: !com.amazonaws.mobilehub.v0.PinpointAnalytics {}
+  sign-in: !com.amazonaws.mobilehub.v0.SignIn {}
+name: kbooks-sl
+region: us-west-2
