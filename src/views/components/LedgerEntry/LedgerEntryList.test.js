@@ -35,6 +35,11 @@ describe("<LedgerEntryList />", () => {
     expect(mockFetchList).toHaveBeenCalledTimes(1);
   });
 
+  it("should render a LedgerEntryToolbar", () => {
+    wrapper = wrapper.dive();
+    expect(wrapper.find("WithStyles(LedgerEntryToolbar)").length).toEqual(1);
+  });
+
   it("should render a LedgerEntryTable", () => {
     wrapper = wrapper.dive();
     expect(wrapper.find("WithStyles(LedgerEntryTable)").length).toEqual(1);
