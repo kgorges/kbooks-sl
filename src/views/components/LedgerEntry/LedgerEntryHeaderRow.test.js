@@ -22,7 +22,7 @@ describe("<LedgerEntryHeaderRow />", () => {
   });
 
   it("should render the correct number of data columns", () => {
-    expect(wrapper.find("WithStyles(TableCell)").length).toEqual(7);
+    expect(wrapper.find("WithStyles(TableCell)").length).toEqual(8);
   });
 
   it("should render the correct headers", () => {
@@ -36,11 +36,18 @@ describe("<LedgerEntryHeaderRow />", () => {
       "Balance",
     ];
 
+    expect(
+      wrapper
+        .find("WithStyles(TableCell)")
+        .at(0)
+        .find("WithStyles(Checkbox)").length
+    ).toEqual(1);
+
     _.map(expectedHeaders, (h, i) => {
       expect(
         wrapper
           .find("WithStyles(TableCell)")
-          .at(i)
+          .at(i + 1)
           .dive()
           .dive()
           .text()

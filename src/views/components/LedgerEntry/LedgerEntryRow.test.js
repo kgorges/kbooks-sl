@@ -32,7 +32,7 @@ describe("<LedgerEntryRow />", () => {
   it("should render the correct number of data columns", () => {
     expect(
       wrapper.find("WithStyles(TableRow)").find("WithStyles(TableCell)").length
-    ).toEqual(7);
+    ).toEqual(8);
   });
 
   const getCellContents = i => {
@@ -46,13 +46,19 @@ describe("<LedgerEntryRow />", () => {
   };
 
   it("should render the correct data in the columns", () => {
-    expect(getCellContents(0)).toEqual(testData.date);
-    expect(getCellContents(1)).toEqual(testData.description);
-    expect(getCellContents(2)).toEqual(testData.account);
-    expect(getCellContents(3)).toEqual(testData.subledgerAccount);
-    expect(Number(getCellContents(4))).toEqual(testData.credit);
-    expect(Number(getCellContents(5))).toEqual(testData.debit);
-    expect(Number(getCellContents(6))).toEqual(
+    expect(
+      wrapper
+        .find("WithStyles(TableCell)")
+        .at(0)
+        .find("WithStyles(Checkbox)").length
+    ).toEqual(1);
+    expect(getCellContents(1)).toEqual(testData.date);
+    expect(getCellContents(2)).toEqual(testData.description);
+    expect(getCellContents(3)).toEqual(testData.account);
+    expect(getCellContents(4)).toEqual(testData.subledgerAccount);
+    expect(Number(getCellContents(5))).toEqual(testData.credit);
+    expect(Number(getCellContents(6))).toEqual(testData.debit);
+    expect(Number(getCellContents(7))).toEqual(
       testData.credit - testData.debit
     );
   });

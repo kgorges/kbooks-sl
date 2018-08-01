@@ -16,62 +16,73 @@ describe("<LedgerEntryToolbar />", () => {
 
   afterEach(() => {});
 
-  it("should render a card header", async () => {
-    expect(wrapper.find("WithStyles(CardHeader)").length).toEqual(1);
+  it("should render a toolbar", async () => {
+    expect(wrapper.find("WithStyles(Toolbar)").length).toEqual(1);
   });
 
-  it("should render an avatar in the card header", async () => {
-    expect(wrapper.find("WithStyles(CardHeader)").prop("avatar")).toBeDefined();
+  it("should render an avatar in the toolbar", async () => {
+    expect(
+      wrapper.find("WithStyles(Toolbar)").find("WithStyles(Avatar)").length
+    ).toEqual(1);
   });
 
-  it("should render the correct title in the card header", async () => {
-    expect(wrapper.find("WithStyles(CardHeader)").prop("title")).toEqual(
-      "General Ledger"
-    );
+  it("should render the correct title", async () => {
+    expect(
+      wrapper
+        .find("WithStyles(Toolbar)")
+        .find("WithStyles(Typography)")
+        .at(0)
+        .dive()
+        .dive()
+        .text()
+    ).toEqual("General Ledger");
   });
 
   it("should render the a subheader with no entries selected", async () => {
-    expect(wrapper.find("WithStyles(CardHeader)").prop("subheader")).toEqual(
-      "0 Rows Selected"
-    );
-  });
-
-  it("should render the toolbar in the card header action", async () => {
-    wrapper = shallow(wrapper.find("WithStyles(CardHeader)").prop("action"));
-    expect(wrapper.find("Toolbar").length).toEqual(1);
+    expect(
+      wrapper
+        .find("WithStyles(Toolbar)")
+        .find("WithStyles(Typography)")
+        .at(1)
+        .dive()
+        .dive()
+        .text()
+    ).toEqual("0 Rows Selected");
   });
 
   it("should render the add button in the card header", async () => {
-    wrapper = shallow(wrapper.find("WithStyles(CardHeader)").prop("action"));
-    expect(wrapper.find("WithStyles(Tooltip)").at(0).length).toEqual(1);
     expect(
       wrapper
+        .find("WithStyles(Toolbar)")
         .find("WithStyles(Tooltip)")
         .at(0)
         .prop("title")
     ).toEqual("Add");
     expect(
       wrapper
+        .find("WithStyles(Toolbar)")
         .find("WithStyles(Tooltip)")
         .at(0)
-        .find("WithStyles(IconButton)").length
+        .find("WithStyles(IconButton)")
+        .find("pure(Add)").length
     ).toEqual(1);
   });
 
   it("should render the filter button in the card header", async () => {
-    wrapper = shallow(wrapper.find("WithStyles(CardHeader)").prop("action"));
-    expect(wrapper.find("WithStyles(Tooltip)").at(1).length).toEqual(1);
     expect(
       wrapper
+        .find("WithStyles(Toolbar)")
         .find("WithStyles(Tooltip)")
         .at(1)
         .prop("title")
     ).toEqual("Filter");
     expect(
       wrapper
+        .find("WithStyles(Toolbar)")
         .find("WithStyles(Tooltip)")
         .at(1)
-        .find("WithStyles(IconButton)").length
+        .find("WithStyles(IconButton)")
+        .find("pure(FilterList)").length
     ).toEqual(1);
   });
 });

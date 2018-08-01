@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
+import Checkbox from "@material-ui/core/Checkbox";
 
 const styles = theme => ({});
 
@@ -12,7 +13,10 @@ class LedgerEntryRow extends Component {
 
     return (
       <TableRow key={entry.id}>
-        <TableCell component="th" scope="row">
+        <TableCell padding="checkbox">
+          <Checkbox />
+        </TableCell>
+        <TableCell component="th" scope="row" padding="none">
           {entry.date}
         </TableCell>
         <TableCell>{entry.description}</TableCell>

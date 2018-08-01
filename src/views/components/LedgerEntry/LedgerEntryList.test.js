@@ -44,4 +44,9 @@ describe("<LedgerEntryList />", () => {
     wrapper = wrapper.dive();
     expect(wrapper.find("WithStyles(LedgerEntryTable)").length).toEqual(1);
   });
+
+  it("should render a LedgerEntryFooterRow", () => {
+    wrapper = wrapper.dive();
+    expect(wrapper.find("WithStyles(LedgerEntryFooterRow)").length).toEqual(1);
+  });
 });
