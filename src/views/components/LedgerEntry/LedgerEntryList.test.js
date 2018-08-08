@@ -14,14 +14,48 @@ describe("<LedgerEntryList />", () => {
     mockFetchList.mockReset();
     shallow = createShallow();
     wrapper = shallow(
-      <StyledLedgerEntryList entries={[]} fetchList={mockFetchList} />
+      <StyledLedgerEntryList
+        entries={[
+          {
+            id: "1",
+            date: "2018-01-01",
+            description: "Some Description",
+            account: "A1",
+            subledgerAccount: "SLA1",
+            credit: 1,
+            debit: 0,
+          },
+          {
+            id: "2",
+            date: "2018-01-01",
+            description: "Some Description",
+            account: "A2",
+            subledgerAccount: "SLA2",
+            credit: 0,
+            debit: 1,
+          },
+          {
+            id: "3",
+            date: "2018-01-01",
+            description: "Some Description",
+            account: "A3",
+            subledgerAccount: "SLA3",
+            credit: 10,
+            debit: 0,
+          },
+        ]}
+        fetchList={mockFetchList}
+        selected={["1", "2"]}
+      />
     );
   });
 
   afterEach(() => {});
 
   it("should have a props mapped from initialState", () => {
+    expect(wrapper.prop("classes")).toBeDefined();
     expect(wrapper.prop("entries")).toBeDefined();
+    expect(wrapper.prop("selected")).toBeDefined();
     expect(wrapper.prop("fetchList")).toBeDefined();
   });
 
@@ -37,16 +71,22 @@ describe("<LedgerEntryList />", () => {
 
   it("should render a LedgerEntryToolbar", () => {
     wrapper = wrapper.dive();
-    expect(wrapper.find("WithStyles(LedgerEntryToolbar)").length).toEqual(1);
+    expect(
+      wrapper.find("Connect(WithStyles(LedgerEntryToolbar))").length
+    ).toEqual(1);
   });
 
   it("should render a LedgerEntryTable", () => {
     wrapper = wrapper.dive();
-    expect(wrapper.find("WithStyles(LedgerEntryTable)").length).toEqual(1);
+    expect(
+      wrapper.find("Connect(WithStyles(LedgerEntryTable))").length
+    ).toEqual(1);
   });
 
   it("should render a LedgerEntryFooterRow", () => {
     wrapper = wrapper.dive();
-    expect(wrapper.find("WithStyles(LedgerEntryFooterRow)").length).toEqual(1);
+    expect(
+      wrapper.find("Connect(WithStyles(LedgerEntryFooterRow))").length
+    ).toEqual(1);
   });
 });

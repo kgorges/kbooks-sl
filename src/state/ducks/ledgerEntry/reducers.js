@@ -1,21 +1,24 @@
 import _ from "lodash";
+import moment from "moment";
 import { combineReducers } from "redux";
 import * as types from "./types";
 import { createReducer } from "../../utils";
 
 /* State shape
 {
-    detail: {
-      item: product,
+    data: { 
+      items: [ ],
+      fetchDate: 'YYYY-MM-DD HH24:MI:SS'
       error: Error,
-      loading: true|false,
       dirty: true|false,
     },
-    list: { 
-      items: [ ],
-      error: Error,
+    ui: {
       loading: true|false,
-      dirty: true|false,
+      selected: [ String ],
+      currentPage: Number,
+      rowsPerPage: Number,
+      edit: true|false,
+      editId: String
     }
 }
 */
@@ -38,25 +41,83 @@ const transformItemList = items => {
   });
 };
 
-const listReducer = createReducer([])({
+const dataReducer = createReducer([])({
   [types.FETCH_LIST_COMPLETED]: (state, action) => {
-    return { items: transformItemList(action.payload.Items) };
+    return {
+      ...state,
+      items: transformItemList(action.payload.Items),
+      fetchDate: moment().format("YYYY-MM-DD HH24:MI:SS"),
+      dirty: false,
+    };
   },
   [types.FETCH_LIST_FAILED]: (state, action) => {
-    return { items: [], error: action.payload.error };
+    return {
+      ...state,
+      items: [],
+      fetchDate: moment().format("YYYY-MM-DD HH24:MI:SS"),
+      error: action.payload.error,
+      dirty: false,
+    };
   },
 });
 
-const detailReducer = createReducer([])({
-  [types.FETCH_DETAIL_COMPLETED]: (state, action) => {
-    return { item: transformItem(action.payload.Item) };
+const uiReducer = createReducer([])({
+  [types.FETCH_LIST]: (state, action) => {
+    return {
+      ...state,
+      loading: true,
+      selected: [],
+    };
   },
-  [types.FETCH_DETAIL_FAILED]: (state, action) => {
-    return { item: {}, error: action.payload.error };
+  [types.FETCH_LIST_COMPLETED]: (state, action) => {
+    return {
+      ...state,
+      loading: false,
+      selected: [],
+    };
+  },
+  [types.FETCH_LIST_FAILED]: (state, action) => {
+    return {
+      ...state,
+      loading: false,
+      selected: [],
+    };
+  },
+  [types.OPEN_EDIT_FORM]: (state, action) => {
+    return {
+      ...state,
+      edit: true,
+      editId: action.id,
+    };
+  },
+  [types.CLOSE_EDIT_FORM]: (state, action) => {
+    return {
+      ...state,
+      edit: false,
+      editId: "0",
+    };
+  },
+  [types.SELECT_ITEMS]: (state, action) => {
+    return {
+      ...state,
+      selected: _.concat(state.selected, action.ids),
+    };
+  },
+  [types.DESELECT_ITEMS]: (state, action) => {
+    const newSelected = [];
+    _.map(state.selected, s => {
+      if (action.ids.indexOf(s) === -1) {
+        newSelected.push(s);
+      }
+    });
+    return {
+      ...state,
+      selected: newSelected,
+    };
   },
 });
 
 export default combineReducers({
-  list: listReducer,
-  detail: detailReducer,
+  data: dataReducer,
+  ui: uiReducer,
 });

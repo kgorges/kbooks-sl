@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import { connect } from "react-redux";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -33,7 +33,7 @@ const styles = theme => ({
 
 class LedgerEntryToolbar extends Component {
   render() {
-    const { classes } = this.props;
+    const { classes, numberOfSelected } = this.props;
 
     return (
       <Toolbar className={classes.root}>
@@ -43,8 +43,10 @@ class LedgerEntryToolbar extends Component {
           </Avatar>
         </div>
         <div className={classes.title}>
-          <Typography variant="title">General Ledger</Typography>
-          <Typography variant="body2">0 Rows Selected</Typography>
+          <Typography variant="body2">General Ledger</Typography>
+          <Typography variant="caption">
+            {numberOfSelected} Rows Selected
+          </Typography>
         </div>
         <div className={classes.spacer} />
         <div className={classes.action}>
@@ -68,21 +70,28 @@ class LedgerEntryToolbar extends Component {
 
 LedgerEntryToolbar.propTypes = {
   classes: PropTypes.object.isRequired,
+  numberOfSelected: PropTypes.number.isRequired,
 };
 
-/*
+LedgerEntryToolbar.defaultProps = {
+  numberOfSelected: 0,
+};
+
 const mapStateToProps = state => ({
-  entries: state.ledgerEntry.list.items,
+  numberOfSelected: state.ledgerEntry.ui.selected.length,
+  //? state.ledgerEntry.list.selected.length
+  //: 0,
 });
 
+/*
 const mapDispatchToProps = {
   fetchList: ledgerEntryOperations.fetchList,
 };
 */
 
-export default withStyles(styles)(LedgerEntryToolbar);
-/*
+export const StyledLedgerEntryToolbar = withStyles(styles)(LedgerEntryToolbar);
+
 export default connect(
-  null,
+  mapStateToProps,
   null
-)(StyledLedgerEntryToolbar);*/
+)(StyledLedgerEntryToolbar);

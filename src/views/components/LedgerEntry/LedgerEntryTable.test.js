@@ -2,12 +2,12 @@ import _ from "lodash";
 import React from "react";
 import renderer from "react-test-renderer";
 import { createShallow } from "@material-ui/core/test-utils";
-import LedgerEntryTable from "./LedgerEntryTable";
+import { StyledLedgerEntryTable as LedgerEntryTable } from "./LedgerEntryTable";
 
 describe("<LedgerEntryTable />", () => {
   let shallow;
   let wrapper;
-  let testData = _.times(5, i => {
+  let testData = _.times(3, i => {
     return {
       id: i,
       date: `2018-01-0${i}`,
@@ -21,7 +21,9 @@ describe("<LedgerEntryTable />", () => {
 
   beforeEach(async () => {
     shallow = createShallow();
-    wrapper = shallow(<LedgerEntryTable entries={testData} />);
+    wrapper = shallow(
+      <LedgerEntryTable entries={testData} rowsPerPage={5} currentPage={0} />
+    );
     wrapper = wrapper.dive();
   });
 
@@ -32,7 +34,9 @@ describe("<LedgerEntryTable />", () => {
   });
 
   it("should render a header row", () => {
-    expect(wrapper.find("WithStyles(LedgerEntryHeaderRow)").length).toEqual(1);
+    expect(
+      wrapper.find("Connect(WithStyles(LedgerEntryHeaderRow))").length
+    ).toEqual(1);
   });
 
   it("should render a table body", () => {
@@ -40,8 +44,20 @@ describe("<LedgerEntryTable />", () => {
   });
 
   it("should render data rows", () => {
-    expect(wrapper.find("WithStyles(LedgerEntryRow)").length).toEqual(
+    expect(wrapper.find("Connect(WithStyles(LedgerEntryRow))").length).toEqual(
       testData.length
     );
+  });
+
+  it("should render an empty row with the proper height", () => {
+    expect(
+      wrapper.find("WithStyles(TableBody)").find("WithStyles(TableRow)").length
+    ).toEqual(1);
+    expect(
+      wrapper
+        .find("WithStyles(TableBody)")
+        .find("WithStyles(TableRow)")
+        .prop("style")
+    ).toEqual({ height: (5 - testData.length) * 49 });
   });
 });

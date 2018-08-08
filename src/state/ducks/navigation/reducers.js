@@ -12,10 +12,10 @@ import { createReducer } from "../../utils";
 
 const drawerReducer = createReducer({})({
   [types.OPEN_NAV_DRAWER]: (state, action) => {
-    return { open: true };
+    return { ...state, open: true };
   },
   [types.CLOSE_NAV_DRAWER]: (state, action) => {
-    return { open: false };
+    return { ...state, open: false };
   },
 });
 

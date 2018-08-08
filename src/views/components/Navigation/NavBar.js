@@ -30,7 +30,7 @@ class NavBar extends Component {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="title" color="inherit">
+            <Typography variant="title" color="inherit" noWrap={true}>
               {dictionary.title}
             </Typography>
           </Toolbar>

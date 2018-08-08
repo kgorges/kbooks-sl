@@ -2,7 +2,7 @@ import _ from "lodash";
 import React from "react";
 import renderer from "react-test-renderer";
 import { createShallow } from "@material-ui/core/test-utils";
-import LedgerEntryToolbar from "./LedgerEntryToolbar";
+import { StyledLedgerEntryToolbar as LedgerEntryToolbar } from "./LedgerEntryToolbar";
 
 describe("<LedgerEntryToolbar />", () => {
   let shallow;
@@ -10,23 +10,30 @@ describe("<LedgerEntryToolbar />", () => {
 
   beforeEach(async () => {
     shallow = createShallow();
-    wrapper = shallow(<LedgerEntryToolbar />);
-    wrapper = wrapper.dive();
+    wrapper = shallow(<LedgerEntryToolbar numberOfSelected={0} />);
   });
 
   afterEach(() => {});
 
+  it("should have a props mapped from state", () => {
+    expect(wrapper.prop("classes")).toBeDefined();
+    expect(wrapper.prop("numberOfSelected")).toBeDefined();
+  });
+
   it("should render a toolbar", async () => {
+    wrapper = wrapper.dive();
     expect(wrapper.find("WithStyles(Toolbar)").length).toEqual(1);
   });
 
   it("should render an avatar in the toolbar", async () => {
+    wrapper = wrapper.dive();
     expect(
       wrapper.find("WithStyles(Toolbar)").find("WithStyles(Avatar)").length
     ).toEqual(1);
   });
 
   it("should render the correct title", async () => {
+    wrapper = wrapper.dive();
     expect(
       wrapper
         .find("WithStyles(Toolbar)")
@@ -39,6 +46,7 @@ describe("<LedgerEntryToolbar />", () => {
   });
 
   it("should render the a subheader with no entries selected", async () => {
+    wrapper = wrapper.dive();
     expect(
       wrapper
         .find("WithStyles(Toolbar)")
@@ -50,7 +58,22 @@ describe("<LedgerEntryToolbar />", () => {
     ).toEqual("0 Rows Selected");
   });
 
+  it("should render the a subheader with 2 entries selected", async () => {
+    wrapper.setProps({ numberOfSelected: 2 });
+    wrapper = wrapper.dive();
+    expect(
+      wrapper
+        .find("WithStyles(Toolbar)")
+        .find("WithStyles(Typography)")
+        .at(1)
+        .dive()
+        .dive()
+        .text()
+    ).toEqual("2 Rows Selected");
+  });
+
   it("should render the add button in the card header", async () => {
+    wrapper = wrapper.dive();
     expect(
       wrapper
         .find("WithStyles(Toolbar)")
@@ -69,6 +92,7 @@ describe("<LedgerEntryToolbar />", () => {
   });
 
   it("should render the filter button in the card header", async () => {
+    wrapper = wrapper.dive();
     expect(
       wrapper
         .find("WithStyles(Toolbar)")

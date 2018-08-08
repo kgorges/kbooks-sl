@@ -9,20 +9,37 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
 import { navigationOperations } from "../../../state/ducks/navigation";
 import Routes from "../../../routes";
 
-const styles = {};
+const styles = theme => ({
+  drawer: {
+    width: 240,
+  },
+  drawerHeader: {
+    ...theme.mixins.toolbar,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    paddingLeft: 24,
+  },
+});
 
 class NavDrawer extends Component {
   render() {
+    const { classes } = this.props;
+
     const renderIcon = c => {
       const IconComp = c;
       return <IconComp />;
     };
+
     return (
       <div>
         <Drawer
+          classes={{ paper: classes.drawer }}
           open={this.props.open}
           onClose={() => this.props.closeNavDrawer()}
         >
@@ -32,6 +49,11 @@ class NavDrawer extends Component {
             role="button"
             onClick={() => this.props.closeNavDrawer()}
           >
+            <div className={classes.drawerHeader}>
+              <Typography variant="title">KBooks</Typography>
+              <Typography variant="caption">v0.0.1</Typography>
+            </div>
+            <Divider />
             <List component="nav">
               {_.map(_.filter(Routes, { navDrawer: true }), (r, i) => {
                 return (

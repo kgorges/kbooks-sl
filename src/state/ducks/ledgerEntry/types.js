@@ -1,7 +1,9 @@
 export const FETCH_LIST = "ledgerEntry/FETCH_LIST";
 export const FETCH_LIST_COMPLETED = "ledgerEntry/FETCH_LIST_COMPLETED";
 export const FETCH_LIST_FAILED = "ledgerEntry/FETCH_LIST_FAILED";
-
-export const FETCH_DETAIL = "ledgerEntry/FETCH_DETAIL";
-export const FETCH_DETAIL_COMPLETED = "ledgerEntry/FETCH_DETAIL_COMPLETED";
-export const FETCH_DETAIL_FAILED = "ledgerEntry/FETCH_DETAIL_FAILED";
+export const OPEN_EDIT_FORM = "ledgerEntry/OPEN_EDIT_FORM";
+export const CLOSE_EDIT_FORM = "ledgerEntry/CLOSE_EDIT_FORM";
+export const SAVE_ITEM = "ledgerEntry/SAVE_ITEM";
+export const DELETE_ITEM = "ledgerEntry/DELETE_ITEM";
+export const SELECT_ITEMS = "ledgerEntry/SELECT_ITEMS";
+export const DESELECT_ITEMS = "ledgerEntry/DESELECT_ITEMS";

@@ -9,6 +9,17 @@ import "./index.css";
 
 const reduxStore = configureStore({
   navigation: { drawer: { open: false } },
+  ledgerEntry: {
+    data: { items: [], fetchDate: "2000-01-01 00:00:00", dirty: false },
+    ui: {
+      loading: false,
+      selected: [],
+      currentPage: 0,
+      rowsPerPage: 5,
+      edit: false,
+      editId: "0",
+    },
+  },
 });
 
 const RootHtml = () => (

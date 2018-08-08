@@ -4,7 +4,7 @@ import * as types from "./types";
 describe("ledgerEntry reducers", () => {
   it("should FETCH_LIST_COMPLETED zero items on initialState", () => {
     const initialState = {
-      list: { items: [] },
+      data: { items: [] },
     };
 
     const action = {
@@ -15,12 +15,12 @@ describe("ledgerEntry reducers", () => {
     };
 
     const result = reducer(initialState, action);
-    expect(result.list.items.length).toEqual(0);
+    expect(result.data.items.length).toEqual(0);
   });
 
   it("should FETCH_LIST_COMPLETED one items on initialState", () => {
     const initialState = {
-      list: { items: [] },
+      data: { items: [] },
     };
 
     const action = {
@@ -36,12 +36,12 @@ describe("ledgerEntry reducers", () => {
     };
 
     const result = reducer(initialState, action);
-    expect(result.list.items.length).toEqual(1);
+    expect(result.data.items.length).toEqual(1);
   });
 
   it("should FETCH_LIST_COMPLETED multiple items on initialState", () => {
     const initialState = {
-      list: { items: [] },
+      data: { items: [] },
     };
 
     const action = {
@@ -61,12 +61,12 @@ describe("ledgerEntry reducers", () => {
     };
 
     const result = reducer(initialState, action);
-    expect(result.list.items.length).toEqual(2);
+    expect(result.data.items.length).toEqual(2);
   });
 
   it("should FETCH_LIST_COMPLETED multiple items ignoring initialState", () => {
     const initialState = {
-      list: {
+      data: {
         items: [
           {
             id: 15,
@@ -93,12 +93,12 @@ describe("ledgerEntry reducers", () => {
     };
 
     const result = reducer(initialState, action);
-    expect(result.list.items.length).toEqual(2);
+    expect(result.data.items.length).toEqual(2);
   });
 
   it("should FETCH_LIST_FAILED", () => {
     const initialState = {
-      list: { items: [] },
+      data: { items: [] },
     };
 
     const action = {
@@ -107,7 +107,7 @@ describe("ledgerEntry reducers", () => {
     };
 
     const result = reducer(initialState, action);
-    expect(result.list.items.length).toEqual(0);
-    expect(result.list.error).toEqual(Error("Some Error"));
+    expect(result.data.items.length).toEqual(0);
+    expect(result.data.error).toEqual(Error("Some Error"));
   });
 });

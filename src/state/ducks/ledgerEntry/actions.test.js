@@ -17,15 +17,10 @@ describe("ledgerEntry actions", () => {
     });
   });
 
-  it("should test FETCH_DETAIL action", () => {
-    expect(actions.fetchDetail(1)).toEqual({
-      type: types.FETCH_DETAIL,
-      meta: {
-        async: true,
-        apiName: "KBSLLedgerEntryCRUD",
-        path: "/KBSLLedgerEntry",
-        id: 1,
-      },
+  it("should test OPEN_EDIT_FORM action", () => {
+    expect(actions.openEditForm(0)).toEqual({
+      type: types.OPEN_EDIT_FORM,
+      id: 0,
     });
   });
 });

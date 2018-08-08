@@ -9,12 +9,18 @@ export const fetchList = () => ({
   },
 });
 
-export const fetchDetail = id => ({
-  type: types.FETCH_DETAIL,
-  meta: {
-    async: true,
-    apiName: "KBSLLedgerEntryCRUD",
-    path: "/KBSLLedgerEntry",
-    id: id,
-  },
+export const openEditForm = id => ({
+  type: types.OPEN_EDIT_FORM,
+  id: id,
+});
+
+export const closeEditForm = () => ({
+  type: types.CLOSE_EDIT_FORM,
+});
+
+export const selectItems = ids => ({ type: types.SELECT_ITEMS, ids: ids });
+
+export const deselectItems = ids => ({
+  type: types.DESELECT_ITEMS,
+  ids: ids,
 });

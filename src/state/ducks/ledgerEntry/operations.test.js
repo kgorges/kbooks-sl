@@ -6,10 +6,18 @@ describe("ledgerEntry operations", () => {
   });
 
   it("should pass the fetchList operation", () => {
-    expect(operations.fetchList()).toBeDefined();
+    expect(operations.fetchList).toBeDefined();
   });
 
-  it("should pass the fetchDetail operation", () => {
-    expect(operations.fetchDetail(1)).toBeDefined();
+  it("should pass the openEditForm operation", () => {
+    expect(operations.openEditForm).toBeDefined();
+  });
+
+  it("should pass the selectItems operation", () => {
+    expect(operations.selectItems).toBeDefined();
+  });
+
+  it("should pass the deselectItems operation", () => {
+    expect(operations.deselectItems).toBeDefined();
   });
 });

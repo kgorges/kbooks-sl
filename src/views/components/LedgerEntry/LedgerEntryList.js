@@ -3,8 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
-import Card from "@material-ui/core/Card";
-import { lighten } from "@material-ui/core/styles/colorManipulator";
+// import { lighten } from "@material-ui/core/styles/colorManipulator";
 import { ledgerEntryShape } from "../../propTypes";
 import { ledgerEntryOperations } from "../../../state/ducks/ledgerEntry";
 import LedgerEntryToolbar from "./LedgerEntryToolbar";
@@ -14,7 +13,8 @@ import LedgerEntryFooterRow from "./LedgerEntryFooterRow";
 const styles = theme => ({
   root: {
     width: "100%",
-    marginTop: theme.spacing.unit * 3,
+    overflow: "auto",
+    // marginTop: theme.spacing.unit,
   },
 });
 
@@ -29,7 +29,7 @@ class LedgerEntryList extends Component {
       <Paper className={classes.root}>
         <LedgerEntryToolbar />
         <LedgerEntryTable entries={entries} />
-        <LedgerEntryFooterRow />
+        <LedgerEntryFooterRow currentPage={0} rowCount={entries.length} />
       </Paper>
     );
   }
@@ -46,7 +46,7 @@ LedgerEntryList.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  entries: state.ledgerEntry.list.items,
+  entries: state.ledgerEntry.data.items,
 });
 
 const mapDispatchToProps = {

@@ -42,6 +42,36 @@ describe("<NavDrawer />", () => {
     expect(drawer.prop("open")).toBeTruthy();
   });
 
+  it("should render a header", () => {
+    const titlewrapper = wrapper
+      .find("WithStyles(Drawer)")
+      .find("div")
+      .find("div")
+      .find("WithStyles(Typography)")
+      .at(0);
+    expect(titlewrapper.prop("variant")).toEqual("title");
+    expect(
+      titlewrapper
+        .dive()
+        .dive()
+        .text()
+    ).toEqual("KBooks");
+
+    const captionwrapper = wrapper
+      .find("WithStyles(Drawer)")
+      .find("div")
+      .find("div")
+      .find("WithStyles(Typography)")
+      .at(1);
+    expect(captionwrapper.prop("variant")).toEqual("caption");
+    expect(
+      captionwrapper
+        .dive()
+        .dive()
+        .text()
+    ).toEqual("v0.0.1");
+  });
+
   it("should render a List", () => {
     expect(
       wrapper.find("WithStyles(Drawer)").find("WithStyles(List)").length

@@ -7,8 +7,9 @@ Amplify.configure(aws_exports);
 // let path = "/items";
 
 const apiService = store => next => action => {
+  const nextResult = next(action);
   if (!action.meta || !action.meta.async) {
-    return next(action);
+    return nextResult;
   }
 
   return API.get(action.meta.apiName, action.meta.path).then(
