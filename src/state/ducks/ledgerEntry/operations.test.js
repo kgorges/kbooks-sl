@@ -20,4 +20,8 @@ describe("ledgerEntry operations", () => {
   it("should pass the deselectItems operation", () => {
     expect(operations.deselectItems).toBeDefined();
   });
+
+  it("should pass the newItem operation", () => {
+    expect(operations.newItem).toBeDefined();
+  });
 });

@@ -24,3 +24,5 @@ export const deselectItems = ids => ({
   type: types.DESELECT_ITEMS,
   ids: ids,
 });
+
+export const newItem = () => ({ type: types.NEW_ITEM });

@@ -42,7 +42,7 @@ describe("ledgerEntry reducers", () => {
 
     const result = reducer(initialState, action);
     expect(result.ui.edit).toBeFalsy();
-    expect(result.ui.editId).toEqual("0");
+    expect(result.ui.editId).toEqual("3");
   });
 
   it("should SELECT_ITEMS on empty initial state", () => {
@@ -113,5 +113,26 @@ describe("ledgerEntry reducers", () => {
     const result = reducer(initialState, action);
     expect(result.ui.selected.length).toEqual(1);
     expect(result.ui.selected[0]).toEqual("3");
+  });
+
+  it("should NEW_ITEM", () => {
+    const initialState = {
+      ui: {
+        loading: false,
+        selected: [],
+        currentPage: 1,
+        rowsPerPage: 5,
+        edit: false,
+        editId: "0",
+      },
+    };
+
+    const action = {
+      type: types.NEW_ITEM,
+    };
+
+    const result = reducer(initialState, action);
+    expect(result.ui.edit).toBeTruthy();
+    expect(result.ui.editId).toEqual("new");
   });
 });

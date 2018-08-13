@@ -94,7 +94,13 @@ const uiReducer = createReducer([])({
     return {
       ...state,
       edit: false,
-      editId: "0",
+    };
+  },
+  [types.NEW_ITEM]: (state, action) => {
+    return {
+      ...state,
+      edit: true,
+      editId: "new",
     };
   },
   [types.SELECT_ITEMS]: (state, action) => {

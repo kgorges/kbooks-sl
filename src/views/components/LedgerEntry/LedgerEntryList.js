@@ -9,6 +9,7 @@ import { ledgerEntryOperations } from "../../../state/ducks/ledgerEntry";
 import LedgerEntryToolbar from "./LedgerEntryToolbar";
 import LedgerEntryTable from "./LedgerEntryTable";
 import LedgerEntryFooterRow from "./LedgerEntryFooterRow";
+import LedgerEntryEditForm from "./LedgerEntryEditForm";
 
 const styles = theme => ({
   root: {
@@ -23,13 +24,14 @@ class LedgerEntryList extends Component {
     this.props.fetchList();
   }
   render() {
-    const { classes, entries } = this.props;
+    const { classes, entries, editId } = this.props;
 
     return (
       <Paper className={classes.root}>
         <LedgerEntryToolbar />
         <LedgerEntryTable entries={entries} />
         <LedgerEntryFooterRow currentPage={0} rowCount={entries.length} />
+        <LedgerEntryEditForm key={editId} />
       </Paper>
     );
   }
@@ -47,6 +49,7 @@ LedgerEntryList.defaultProps = {
 
 const mapStateToProps = state => ({
   entries: state.ledgerEntry.data.items,
+  editId: state.ledgerEntry.ui.editId,
 });
 
 const mapDispatchToProps = {

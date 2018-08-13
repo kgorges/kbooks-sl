@@ -44,8 +44,8 @@ describe("<LedgerEntryList />", () => {
             debit: 0,
           },
         ]}
+        editFormOpen={false}
         fetchList={mockFetchList}
-        selected={["1", "2"]}
       />
     );
   });
@@ -55,7 +55,6 @@ describe("<LedgerEntryList />", () => {
   it("should have a props mapped from initialState", () => {
     expect(wrapper.prop("classes")).toBeDefined();
     expect(wrapper.prop("entries")).toBeDefined();
-    expect(wrapper.prop("selected")).toBeDefined();
     expect(wrapper.prop("fetchList")).toBeDefined();
   });
 
@@ -87,6 +86,13 @@ describe("<LedgerEntryList />", () => {
     wrapper = wrapper.dive();
     expect(
       wrapper.find("Connect(WithStyles(LedgerEntryFooterRow))").length
+    ).toEqual(1);
+  });
+
+  it("should render an edit form when prop indicates it is open", () => {
+    expect(
+      wrapper.dive().find("Connect(WithTheme(WithWidth(WithMobileDialog)))")
+        .length
     ).toEqual(1);
   });
 });

@@ -1,3 +1,17 @@
-import { fetchList, openEditForm, selectItems, deselectItems } from "./actions";
+import {
+  fetchList,
+  openEditForm,
+  closeEditForm,
+  selectItems,
+  deselectItems,
+  newItem,
+} from "./actions";
 
-export { fetchList, openEditForm, selectItems, deselectItems };
+export {
+  fetchList,
+  openEditForm,
+  closeEditForm,
+  selectItems,
+  deselectItems,
+  newItem,
+};
