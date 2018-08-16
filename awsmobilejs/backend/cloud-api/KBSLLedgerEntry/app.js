@@ -192,20 +192,15 @@ app.put(path, function(req, res) {
  *************************************/
 
 app.post(path, function(req, res) {
-  if (userIdPresent) {
-    req.body["userId"] =
-      req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
-  }
-
   let putItemParams = {
     TableName: tableName,
     Item: req.body,
   };
   dynamodb.put(putItemParams, (err, data) => {
     if (err) {
-      res.json({ error: err, url: req.url, body: req.body });
+      res.json({ error: "Could not post item:" + err });
     } else {
-      res.json({ success: "post call succeed!", url: req.url, data: data });
+      res.json({ Item: req.body, Status: "Success" });
     }
   });
 });

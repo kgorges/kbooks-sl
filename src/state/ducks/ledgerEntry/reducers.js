@@ -59,6 +59,27 @@ const dataReducer = createReducer([])({
       dirty: false,
     };
   },
+  [types.SAVE_ITEM_COMPLETED]: (state, action) => {
+    const newItems = _.clone(state.items);
+    if (_.find(newItems, { id: action.payload.Item.ID })) {
+      console.log("Removing old item");
+      _.remove(newItems, { id: action.payload.Item.ID });
+    }
+    newItems.push(transformItem(action.payload.Item));
+
+    return {
+      ...state,
+      items: newItems,
+      dirty: false,
+    };
+  },
+  [types.SAVE_ITEM_FAILED]: (state, action) => {
+    return {
+      ...state,
+      error: action.payload.error,
+      dirty: false,
+    };
+  },
 });
 
 const uiReducer = createReducer([])({
@@ -94,6 +115,7 @@ const uiReducer = createReducer([])({
     return {
       ...state,
       edit: false,
+      editId: "0",
     };
   },
   [types.NEW_ITEM]: (state, action) => {

@@ -24,4 +24,8 @@ describe("ledgerEntry operations", () => {
   it("should pass the newItem operation", () => {
     expect(operations.newItem).toBeDefined();
   });
+
+  it("should pass the saveItem operation", () => {
+    expect(operations.saveItem).toBeDefined();
+  });
 });

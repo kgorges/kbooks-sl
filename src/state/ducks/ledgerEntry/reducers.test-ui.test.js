@@ -42,7 +42,7 @@ describe("ledgerEntry reducers", () => {
 
     const result = reducer(initialState, action);
     expect(result.ui.edit).toBeFalsy();
-    expect(result.ui.editId).toEqual("3");
+    expect(result.ui.editId).toEqual("0");
   });
 
   it("should SELECT_ITEMS on empty initial state", () => {

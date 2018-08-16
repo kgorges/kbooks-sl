@@ -9,31 +9,31 @@ features:
           sdk-generation-stage-name: Development
         paths:
           /KBSLLedgerEntry: !com.amazonaws.mobilehub.v0.Function 
-            codeFilename: uploads/KBSLLedgerEntry-20180725122132.zip
+            codeFilename: uploads/KBSLLedgerEntry-20180815212747.zip
             description: 'Handler for calls to resource path : /KBSLLedgerEntry/{proxy+}'
             enableCORS: true
             environment: {}
             handler: lambda.handler
-            hashcode: 4yAisUVfyonfP3Oyf9ljlLp5tAQG5TC8Y5x6yX+SLpw=
+            hashcode: Y/AFqssMKi7Xx/Aqn3uXPYBwMfwRAkCrl3n+fTSjNtc=
             memorySize: '128'
-            modified: '2018-07-25T17:22:32.435+0000'
+            modified: '2018-08-16T02:29:14.164+0000'
             name: KBSLLedgerEntry
             runtime: nodejs6.10
             timeout: '3'
-            version: sk8ULpXlMqs07UeUmgRZ0yGiYfI3QGxR
+            version: PRLQVIsACa0rWG5fUUtvhOINcItUszHQ
           '/KBSLLedgerEntry/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
-            codeFilename: uploads/KBSLLedgerEntry-20180725122132.zip
+            codeFilename: uploads/KBSLLedgerEntry-20180815212747.zip
             description: 'Handler for calls to resource path : /KBSLLedgerEntry/{proxy+}'
             enableCORS: true
             environment: {}
             handler: lambda.handler
-            hashcode: 4yAisUVfyonfP3Oyf9ljlLp5tAQG5TC8Y5x6yX+SLpw=
+            hashcode: Y/AFqssMKi7Xx/Aqn3uXPYBwMfwRAkCrl3n+fTSjNtc=
             memorySize: '128'
-            modified: '2018-07-25T17:22:32.435+0000'
+            modified: '2018-08-16T02:29:14.164+0000'
             name: KBSLLedgerEntry
             runtime: nodejs6.10
             timeout: '3'
-            version: CqgMiCOZ68dntg72wSyhC7K.8wC857XS
+            version: nVk3kjyqU3aZO3U.nCRkNZenfOC.nB1X
   content-delivery: !com.amazonaws.mobilehub.v0.ContentDelivery 
     attributes:
       enabled: true

@@ -8,7 +8,13 @@ describe("<LedgerEntryEditForm />", () => {
   let shallow;
   let wrapper;
 
+  const mockCloseEditForm = jest.fn();
+  const mockSaveItem = jest.fn();
+
   beforeEach(async () => {
+    mockCloseEditForm.mockReset();
+    mockSaveItem.mockReset();
+
     shallow = createShallow();
     wrapper = shallow(
       <LedgerEntryEditForm
@@ -21,8 +27,9 @@ describe("<LedgerEntryEditForm />", () => {
           subledgerAccount: "sla",
           credit: 0,
           debit: 1,
-          balance: -1,
         }}
+        closeEditForm={mockCloseEditForm}
+        saveItem={mockSaveItem}
       />
     );
   });
@@ -32,6 +39,8 @@ describe("<LedgerEntryEditForm />", () => {
   it("should have all props", async () => {
     expect(wrapper.prop("classes")).toBeDefined();
     expect(wrapper.prop("isOpen")).toBeDefined();
+    expect(wrapper.prop("closeEditForm")).toBeDefined();
+    expect(wrapper.prop("saveItem")).toBeDefined();
   });
 
   it("should render a dialog", async () => {
@@ -40,7 +49,7 @@ describe("<LedgerEntryEditForm />", () => {
     expect(wrapper.find("WithStyles(Dialog)").length).toEqual(1);
   });
 
-  it("should render a date text input", () => {
+  it("should render a date input", () => {
     wrapper = wrapper.dive();
     const dateWrapper = wrapper
       .find("WithStyles(Dialog)")
@@ -62,5 +71,60 @@ describe("<LedgerEntryEditForm />", () => {
     expect(dateWrapper.prop("label")).toEqual("Description");
     expect(dateWrapper.prop("type")).toEqual("text");
     expect(dateWrapper.prop("value")).toEqual("desc");
+  });
+
+  it("should render a save button", () => {
+    wrapper = wrapper.dive();
+    const buttonWrapper = wrapper
+      .find("WithStyles(Dialog)")
+      .find("WithStyles(DialogActions)")
+      .find("WithStyles(Button)")
+      .at(1)
+      .dive();
+    expect(buttonWrapper.contains("Save")).toBeTruthy();
+  });
+
+  it("should invoke saveItem when save button is clicked", () => {
+    wrapper = wrapper.dive();
+    const buttonWrapper = wrapper
+      .find("WithStyles(Dialog)")
+      .find("WithStyles(DialogActions)")
+      .find("WithStyles(Button)")
+      .at(1)
+      .dive();
+    buttonWrapper.simulate("click");
+    expect(mockSaveItem).toHaveBeenCalledWith({
+      id: "1",
+      date: "2018-01-01",
+      description: "desc",
+      account: "acct",
+      subledgerAccount: "sla",
+      credit: 0,
+      debit: 1,
+    });
+    expect(mockCloseEditForm).toHaveBeenCalled();
+  });
+
+  it("should render a cancel button", () => {
+    wrapper = wrapper.dive();
+    const buttonWrapper = wrapper
+      .find("WithStyles(Dialog)")
+      .find("WithStyles(DialogActions)")
+      .find("WithStyles(Button)")
+      .at(0)
+      .dive();
+    expect(buttonWrapper.contains("Cancel")).toBeTruthy();
+  });
+
+  it("should invoke closeEditForm when close button is clicked", () => {
+    wrapper = wrapper.dive();
+    const buttonWrapper = wrapper
+      .find("WithStyles(Dialog)")
+      .find("WithStyles(DialogActions)")
+      .find("WithStyles(Button)")
+      .at(1)
+      .dive();
+    buttonWrapper.simulate("click");
+    expect(mockCloseEditForm).toHaveBeenCalled();
   });
 });

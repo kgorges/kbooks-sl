@@ -28,15 +28,23 @@ class LedgerEntryEditForm extends Component {
   };
 
   handleCancel = () => {
+    this.props.closeEditForm();
+    /*
     this.setState({
       id: _.get(this.props.entry, "id", "0"),
       date: _.get(this.props.entry, "date", "2000-01-01"),
       description: _.get(this.props.entry, "description", ""),
     });
-    this.props.closeEditForm();
+    */
   };
 
   handleSave = () => {
+    this.props.saveItem({
+      ...this.props.entry,
+      id: this.state.id,
+      date: this.state.date,
+      description: this.state.description,
+    });
     this.props.closeEditForm();
   };
 
@@ -75,6 +83,7 @@ class LedgerEntryEditForm extends Component {
             margin="normal"
             id="description"
             label="Description"
+            type="text"
             value={this.state.description}
             onChange={handleChange("description")}
             InputLabelProps={{
@@ -100,6 +109,8 @@ LedgerEntryEditForm.propTypes = {
   classes: PropTypes.object.isRequired,
   isOpen: PropTypes.bool.isRequired,
   entry: PropTypes.object,
+  closeEditForm: PropTypes.func.isRequired,
+  saveItem: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -111,6 +122,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   closeEditForm: ledgerEntryOperations.closeEditForm,
+  saveItem: ledgerEntryOperations.saveItem,
 };
 
 export const StyledLedgerEntryEditForm = withStyles(styles)(

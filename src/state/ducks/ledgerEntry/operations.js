@@ -5,6 +5,7 @@ import {
   selectItems,
   deselectItems,
   newItem,
+  saveItem,
 } from "./actions";
 
 export {
@@ -14,4 +15,5 @@ export {
   selectItems,
   deselectItems,
   newItem,
+  saveItem,
 };

@@ -6,6 +6,8 @@ export const fetchList = () => ({
     async: true,
     apiName: "KBSLLedgerEntryCRUD",
     path: "/KBSLLedgerEntry",
+    method: "GET",
+    payload: {},
   },
 });
 
@@ -26,3 +28,25 @@ export const deselectItems = ids => ({
 });
 
 export const newItem = () => ({ type: types.NEW_ITEM });
+
+const transformItem = item => {
+  return {
+    ID: item.id,
+    Date: item.date,
+    Description: item.description,
+    Account: item.account,
+    SubledgerAccount: item.subledgerAccount,
+    Credit: item.credit,
+    Debit: item.debit,
+  };
+};
+export const saveItem = item => ({
+  type: types.SAVE_ITEM,
+  meta: {
+    async: true,
+    apiName: "KBSLLedgerEntryCRUD",
+    path: "/KBSLLedgerEntry",
+    method: "POST",
+    payload: { body: transformItem(item) },
+  },
+});

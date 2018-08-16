@@ -12,9 +12,23 @@ const apiService = store => next => action => {
     return nextResult;
   }
 
-  return API.get(action.meta.apiName, action.meta.path).then(
+  const apiFunctions = {
+    GET: (apiName, path, payload) => {
+      return API.get(apiName, path, payload);
+    },
+    POST: (apiName, path, payload) => {
+      // console.log({ action });
+      return API.post(apiName, path, payload);
+    },
+  };
+
+  return apiFunctions[action.meta.method](
+    action.meta.apiName,
+    action.meta.path,
+    action.meta.payload
+  ).then(
     response => {
-      // console.info({ Response: response });
+      // console.info({ response });
       next({
         type: `${action.type}_COMPLETED`,
         payload: response,
@@ -22,7 +36,7 @@ const apiService = store => next => action => {
       });
     },
     error => {
-      // console.error({ Error: error });
+      // console.error({ error });
       next({
         type: `${action.type}_FAILED`,
         payload: error,
