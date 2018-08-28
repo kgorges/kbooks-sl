@@ -1,5 +1,6 @@
 import _ from "lodash";
-// import moment from "moment";
+import moment from "moment";
+import uuid from "uuid/v1";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -22,9 +23,13 @@ const styles = theme => ({
 
 class LedgerEntryEditForm extends Component {
   state = {
-    id: _.get(this.props.entry, "id", "0"),
+    id: _.get(this.props.entry, "id", "new"),
     date: _.get(this.props.entry, "date", "2000-01-01"),
     description: _.get(this.props.entry, "description", ""),
+    account: _.get(this.props.entry, "account", ""),
+    subledgerAccount: _.get(this.props.entry, "subledgerAccount", ""),
+    amount: _.get(this.props.entry, "amount", 0),
+    creationDate: _.get(this.props.entry, "lastUpdateDate", ""),
   };
 
   handleCancel = () => {
@@ -41,11 +46,21 @@ class LedgerEntryEditForm extends Component {
   handleSave = () => {
     this.props.saveItem({
       ...this.props.entry,
-      id: this.state.id,
+      id: this.state.id === "new" ? uuid() : this.state.id,
       date: this.state.date,
       description: this.state.description,
+      account: this.state.account,
+      subledgerAccount: this.state.subledgerAccount,
+      amount: Number(this.state.amount),
+      lastUpdateDate: moment().format("YYYY-MM-DD HH:mm:ss.SSS"),
+      lastUpdatedBy: "SYSTEM",
+      creationDate:
+        this.state.id === "new"
+          ? moment().format("YYYY-MM-DD HH:mm:ss.SSS")
+          : this.state.creationDate,
+      createdBy: this.state.id === "new" ? "SYSTEM" : "SYSTEM",
     });
-    this.props.closeEditForm();
+    // this.props.closeEditForm();
   };
 
   render() {
@@ -61,7 +76,7 @@ class LedgerEntryEditForm extends Component {
       <Dialog
         fullScreen={fullScreen}
         open={isOpen}
-        onClose={this.handleClose}
+        onClose={this.handleCancel}
         aria-labelledby="responsive-dialog-title"
       >
         <DialogTitle id="responsive-dialog-title">{"Ledger Entry"}</DialogTitle>
@@ -86,6 +101,44 @@ class LedgerEntryEditForm extends Component {
             type="text"
             value={this.state.description}
             onChange={handleChange("description")}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            className={classes.textField}
+          />
+          <TextField
+            margin="normal"
+            id="account"
+            label="Account"
+            type="text"
+            value={this.state.account}
+            onChange={handleChange("account")}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            className={classes.textField}
+          />
+
+          <TextField
+            margin="normal"
+            id="subledgerAccount"
+            label="Subledger Account"
+            type="text"
+            value={this.state.subledgerAccount}
+            onChange={handleChange("subledgerAccount")}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            className={classes.textField}
+          />
+
+          <TextField
+            margin="normal"
+            id="amount"
+            label="Amount"
+            type="number"
+            value={this.state.amount}
+            onChange={handleChange("amount")}
             InputLabelProps={{
               shrink: true,
             }}

@@ -46,9 +46,7 @@ class LedgerEntryRow extends Component {
         </TableCell>
         <TableCell>{entry.account}</TableCell>
         <TableCell>{entry.subledgerAccount}</TableCell>
-        <TableCell numeric>{entry.credit}</TableCell>
-        <TableCell numeric>{entry.debit}</TableCell>
-        <TableCell numeric>{entry.credit - entry.debit}</TableCell>
+        <TableCell numeric>{entry.amount}</TableCell>
       </TableRow>
     );
   }

@@ -28,4 +28,12 @@ describe("ledgerEntry operations", () => {
   it("should pass the saveItem operation", () => {
     expect(operations.saveItem).toBeDefined();
   });
+
+  it("should pass the changePage operation", () => {
+    expect(operations.changePage).toBeDefined();
+  });
+
+  it("should pass the changeRowsPerPage operation", () => {
+    expect(operations.changeRowsPerPage).toBeDefined();
+  });
 });

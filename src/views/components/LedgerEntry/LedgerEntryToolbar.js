@@ -11,6 +11,7 @@ import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 import FilterListIcon from "@material-ui/icons/FilterList";
 // import DeleteIcon from "@material-ui/icons/Delete";
+import { ledgerEntryOperations } from "../../../state/ducks/ledgerEntry";
 
 const styles = theme => ({
   root: {
@@ -33,7 +34,7 @@ const styles = theme => ({
 
 class LedgerEntryToolbar extends Component {
   render() {
-    const { classes, numberOfSelected } = this.props;
+    const { classes, numberOfSelected, newItem } = this.props;
 
     return (
       <Toolbar className={classes.root}>
@@ -51,7 +52,7 @@ class LedgerEntryToolbar extends Component {
         <div className={classes.spacer} />
         <div className={classes.action}>
           <Tooltip title="Add">
-            <IconButton aria-label="Add">
+            <IconButton aria-label="Add" onClick={() => newItem()}>
               <AddIcon />
             </IconButton>
           </Tooltip>
@@ -71,6 +72,7 @@ class LedgerEntryToolbar extends Component {
 LedgerEntryToolbar.propTypes = {
   classes: PropTypes.object.isRequired,
   numberOfSelected: PropTypes.number.isRequired,
+  newItem: PropTypes.func.isRequired,
 };
 
 LedgerEntryToolbar.defaultProps = {
@@ -83,15 +85,13 @@ const mapStateToProps = state => ({
   //: 0,
 });
 
-/*
 const mapDispatchToProps = {
-  fetchList: ledgerEntryOperations.fetchList,
+  newItem: ledgerEntryOperations.newItem,
 };
-*/
 
 export const StyledLedgerEntryToolbar = withStyles(styles)(LedgerEntryToolbar);
 
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(StyledLedgerEntryToolbar);

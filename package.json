@@ -19,7 +19,8 @@
     "redux": "^4.0.0",
     "redux-mock-store": "^1.5.3",
     "redux-test-utils": "^0.2.2",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -28,15 +28,7 @@ class LedgerEntryHeaderRow extends Component {
       }
     };
 
-    const headers = [
-      "Date",
-      "Description",
-      "Account",
-      "Subaccount",
-      "Credit",
-      "Debit",
-      "Balance",
-    ];
+    const headers = ["Date", "Description", "Account", "Subaccount", "Amount"];
 
     return (
       <TableHead>

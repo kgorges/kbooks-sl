@@ -6,6 +6,8 @@ import {
   deselectItems,
   newItem,
   saveItem,
+  changePage,
+  changeRowsPerPage,
 } from "./actions";
 
 export {
@@ -16,4 +18,6 @@ export {
   deselectItems,
   newItem,
   saveItem,
+  changePage,
+  changeRowsPerPage,
 };

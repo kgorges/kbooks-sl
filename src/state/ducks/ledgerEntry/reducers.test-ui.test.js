@@ -135,4 +135,25 @@ describe("ledgerEntry reducers", () => {
     expect(result.ui.edit).toBeTruthy();
     expect(result.ui.editId).toEqual("new");
   });
+
+  it("should NEW_ITEM", () => {
+    const initialState = {
+      ui: {
+        loading: false,
+        selected: [],
+        currentPage: 1,
+        rowsPerPage: 5,
+        edit: false,
+        editId: "0",
+      },
+    };
+
+    const action = {
+      type: types.CHANGE_PAGE,
+      newPage: 3,
+    };
+
+    const result = reducer(initialState, action);
+    expect(result.ui.currentPage).toEqual(3);
+  });
 });

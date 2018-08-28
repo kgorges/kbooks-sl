@@ -8,6 +8,5 @@ export default shape({
   description: string.isRequired,
   account: string.isRequired,
   subledgerAccount: string,
-  credit: number.isRequired,
-  debit: number.isRequired,
+  amount: number.isRequired,
 });

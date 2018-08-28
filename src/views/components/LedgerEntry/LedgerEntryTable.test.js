@@ -22,7 +22,12 @@ describe("<LedgerEntryTable />", () => {
   beforeEach(async () => {
     shallow = createShallow();
     wrapper = shallow(
-      <LedgerEntryTable entries={testData} rowsPerPage={5} currentPage={0} />
+      <LedgerEntryTable
+        entries={testData}
+        loading={false}
+        rowsPerPage={5}
+        currentPage={0}
+      />
     );
     wrapper = wrapper.dive();
   });

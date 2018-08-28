@@ -8,9 +8,14 @@ describe("<LedgerEntryToolbar />", () => {
   let shallow;
   let wrapper;
 
+  const mockNewItem = jest.fn();
+
   beforeEach(async () => {
+    mockNewItem.mockReset();
     shallow = createShallow();
-    wrapper = shallow(<LedgerEntryToolbar numberOfSelected={0} />);
+    wrapper = shallow(
+      <LedgerEntryToolbar numberOfSelected={0} newItem={mockNewItem} />
+    );
   });
 
   afterEach(() => {});
@@ -18,6 +23,7 @@ describe("<LedgerEntryToolbar />", () => {
   it("should have a props mapped from state", () => {
     expect(wrapper.prop("classes")).toBeDefined();
     expect(wrapper.prop("numberOfSelected")).toBeDefined();
+    expect(wrapper.prop("newItem")).toBeDefined();
   });
 
   it("should render a toolbar", async () => {
@@ -108,5 +114,16 @@ describe("<LedgerEntryToolbar />", () => {
         .find("WithStyles(IconButton)")
         .find("pure(FilterList)").length
     ).toEqual(1);
+  });
+
+  it("should call the new item mock function upon button click", () => {
+    const buttonWrapper = wrapper
+      .dive()
+      .find("WithStyles(Toolbar)")
+      .find("WithStyles(Tooltip)")
+      .at(0)
+      .find("WithStyles(IconButton)");
+    buttonWrapper.simulate("click");
+    expect(mockNewItem).toHaveBeenCalled();
   });
 });

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
+
 // import { lighten } from "@material-ui/core/styles/colorManipulator";
 import { ledgerEntryShape } from "../../propTypes";
 import { ledgerEntryOperations } from "../../../state/ducks/ledgerEntry";

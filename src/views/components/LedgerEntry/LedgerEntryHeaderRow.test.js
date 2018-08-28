@@ -37,7 +37,7 @@ describe("<LedgerEntryHeaderRow />", () => {
   it("should render the correct number of data columns", () => {
     wrapper = wrapper.dive();
 
-    expect(wrapper.find("WithStyles(TableCell)").length).toEqual(8);
+    expect(wrapper.find("WithStyles(TableCell)").length).toEqual(6);
   });
 
   it("should render the correct headers", () => {
@@ -48,9 +48,7 @@ describe("<LedgerEntryHeaderRow />", () => {
       "Description",
       "Account",
       "Subaccount",
-      "Credit",
-      "Debit",
-      "Balance",
+      "Amount",
     ];
 
     expect(

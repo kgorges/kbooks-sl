@@ -60,8 +60,7 @@ describe("ledgerEntry actions", () => {
         description: "D1",
         account: "A1",
         subledgerAccount: "SLA1",
-        credit: 0,
-        debit: 1,
+        amount: 100,
       })
     ).toEqual({
       type: types.SAVE_ITEM,
@@ -77,11 +76,24 @@ describe("ledgerEntry actions", () => {
             Description: "D1",
             Account: "A1",
             SubledgerAccount: "SLA1",
-            Credit: 0,
-            Debit: 1,
+            Amount: 100,
           },
         },
       },
+    });
+  });
+
+  it("should test CHANGE_PAGE action", () => {
+    expect(actions.changePage(2)).toEqual({
+      type: types.CHANGE_PAGE,
+      newPage: 2,
+    });
+  });
+
+  it("should test CHANGE_ROWS_PER_PAGE action", () => {
+    expect(actions.changeRowsPerPage(25)).toEqual({
+      type: types.CHANGE_ROWS_PER_PAGE,
+      newRowsPerPage: 25,
     });
   });
 });

@@ -22,8 +22,7 @@ describe("<LedgerEntryList />", () => {
             description: "Some Description",
             account: "A1",
             subledgerAccount: "SLA1",
-            credit: 1,
-            debit: 0,
+            amount: 1,
           },
           {
             id: "2",
@@ -31,8 +30,7 @@ describe("<LedgerEntryList />", () => {
             description: "Some Description",
             account: "A2",
             subledgerAccount: "SLA2",
-            credit: 0,
-            debit: 1,
+            amount: 0,
           },
           {
             id: "3",
@@ -40,8 +38,7 @@ describe("<LedgerEntryList />", () => {
             description: "Some Description",
             account: "A3",
             subledgerAccount: "SLA3",
-            credit: 10,
-            debit: 0,
+            amount: 10,
           },
         ]}
         editFormOpen={false}

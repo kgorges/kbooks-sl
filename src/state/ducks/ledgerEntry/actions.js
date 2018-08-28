@@ -36,8 +36,11 @@ const transformItem = item => {
     Description: item.description,
     Account: item.account,
     SubledgerAccount: item.subledgerAccount,
-    Credit: item.credit,
-    Debit: item.debit,
+    Amount: item.amount,
+    LastUpdateDate: item.lastUpdateDate,
+    LastUpdatedBy: item.lastUpdatedBy,
+    CreationDate: item.creationDate,
+    CreatedBy: item.createdBy,
   };
 };
 export const saveItem = item => ({
@@ -49,4 +52,14 @@ export const saveItem = item => ({
     method: "POST",
     payload: { body: transformItem(item) },
   },
+});
+
+export const changePage = newPage => ({
+  type: types.CHANGE_PAGE,
+  newPage: newPage,
+});
+
+export const changeRowsPerPage = newRowsPerPage => ({
+  type: types.CHANGE_ROWS_PER_PAGE,
+  newRowsPerPage: newRowsPerPage,
 });

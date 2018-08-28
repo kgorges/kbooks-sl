@@ -18,8 +18,7 @@ describe("<LedgerEntryRow />", () => {
     description: "some description",
     account: "some account",
     subledgerAccount: "some sub account",
-    credit: 1,
-    debit: 0,
+    amount: 100,
   };
 
   beforeEach(async () => {
@@ -58,7 +57,7 @@ describe("<LedgerEntryRow />", () => {
     wrapper = wrapper.dive();
     expect(
       wrapper.find("WithStyles(TableRow)").find("WithStyles(TableCell)").length
-    ).toEqual(8);
+    ).toEqual(6);
   });
 
   const getCellContents = i => {
@@ -83,11 +82,7 @@ describe("<LedgerEntryRow />", () => {
     expect(getCellContents(2)).toEqual(testData.description);
     expect(getCellContents(3)).toEqual(testData.account);
     expect(getCellContents(4)).toEqual(testData.subledgerAccount);
-    expect(Number(getCellContents(5))).toEqual(testData.credit);
-    expect(Number(getCellContents(6))).toEqual(testData.debit);
-    expect(Number(getCellContents(7))).toEqual(
-      testData.credit - testData.debit
-    );
+    expect(Number(getCellContents(5))).toEqual(testData.amount);
   });
 
   it("should invoke the mock function when clicking a non-checkbox cell", () => {

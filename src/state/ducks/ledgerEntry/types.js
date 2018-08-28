@@ -11,3 +11,5 @@ export const SAVE_ITEM_FAILED = `${prefix}/SAVE_ITEM_FAILED`;
 export const DELETE_ITEM = `${prefix}/DELETE_ITEM`;
 export const SELECT_ITEMS = `${prefix}/SELECT_ITEMS`;
 export const DESELECT_ITEMS = `${prefix}/DESELECT_ITEMS`;
+export const CHANGE_PAGE = `${prefix}/CHANGE_PAGE`;
+export const CHANGE_ROWS_PER_PAGE = `${prefix}/CHANGE_ROWS_PER_PAGE`;

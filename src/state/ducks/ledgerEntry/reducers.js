@@ -30,8 +30,11 @@ const transformItem = item => {
     description: item.Description,
     account: item.Account,
     subledgerAccount: item.SubledgerAccount,
-    credit: item.Credit,
-    debit: item.Debit,
+    amount: item.Amount,
+    lastUpdateDate: item.LastUpdateDate,
+    lastUpdatedBy: item.LastUpdatedBy,
+    creationDate: item.CreationDate,
+    createdBy: item.CreatedBy,
   };
 };
 
@@ -62,7 +65,6 @@ const dataReducer = createReducer([])({
   [types.SAVE_ITEM_COMPLETED]: (state, action) => {
     const newItems = _.clone(state.items);
     if (_.find(newItems, { id: action.payload.Item.ID })) {
-      console.log("Removing old item");
       _.remove(newItems, { id: action.payload.Item.ID });
     }
     newItems.push(transformItem(action.payload.Item));
@@ -141,6 +143,37 @@ const uiReducer = createReducer([])({
     return {
       ...state,
       selected: newSelected,
+    };
+  },
+  [types.SAVE_ITEM]: (state, action) => {
+    return {
+      ...state,
+      loading: true,
+      selected: [],
+    };
+  },
+  [types.SAVE_ITEM_COMPLETED]: (state, action) => {
+    return {
+      ...state,
+      loading: false,
+      selected: [],
+      edit: false,
+      editId: "0",
+    };
+  },
+  [types.SAVE_ITEM_FAILED]: (state, action) => {
+    return {
+      ...state,
+      loading: false,
+      selected: [],
+      edit: false,
+      editId: "0",
+    };
+  },
+  [types.CHANGE_PAGE]: (state, action) => {
+    return {
+      ...state,
+      currentPage: action.newPage,
     };
   },
 });

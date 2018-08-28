@@ -125,8 +125,7 @@ describe("ledgerEntry reducers", () => {
           Description: "Description1",
           Account: "A1",
           SubledgerAccount: "SLA1",
-          Credit: 0,
-          Debit: 1,
+          Amount: 100,
         },
       },
     };
@@ -147,7 +146,7 @@ describe("ledgerEntry reducers", () => {
             account: "A1",
             subledgerAccount: "SLA1",
             credit: 0,
-            debit: 100,
+            amount: 100,
           },
         ],
       },
@@ -162,8 +161,7 @@ describe("ledgerEntry reducers", () => {
           Description: "Description1",
           Account: "A1",
           SubledgerAccount: "SLA1",
-          Credit: 0,
-          Debit: 1,
+          Amount: 100,
         },
       },
     };
@@ -176,8 +174,7 @@ describe("ledgerEntry reducers", () => {
       description: "Description1",
       account: "A1",
       subledgerAccount: "SLA1",
-      credit: 0,
-      debit: 1,
+      amount: 100,
     });
     expect(result.data.dirty).toBeFalsy();
   });
